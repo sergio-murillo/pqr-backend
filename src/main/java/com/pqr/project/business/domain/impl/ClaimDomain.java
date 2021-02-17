@@ -50,12 +50,12 @@ public class ClaimDomain implements IClaimDomain {
      */
     public Claim createClaim(final CreateClaimDto dto) {
         try {
-            Optional<Request> requestFound = requestRepository.findById(dto.getRequestId());
+            final Optional<Request> requestFound = requestRepository.findById(dto.getRequestId());
             if (requestFound.isPresent()) {
-                Request request = requestFound.get();
-                Long daysDifference = Duration.between(request.getCreationDate(), LocalDateTime.now()).toDays();
+                final Request request = requestFound.get();
+                final Long daysDifference = Duration.between(request.getCreationDate(), LocalDateTime.now()).toDays();
                 if (daysDifference > 5 || !request.getAnswer().isEmpty()) {
-                    Claim claim = modelMapper.map(dto, Claim.class);
+                    final Claim claim = modelMapper.map(dto, Claim.class);
                     claim.setCustomer(request.getCustomer());
                     claim.setCreationDate(LocalDateTime.now());
                     claim.setRequest(request);
@@ -91,16 +91,16 @@ public class ClaimDomain implements IClaimDomain {
     /**
      * Metodo encargado de filtrar por estado y ID todos los reclamos
      */
-    public List<Claim> findClaimsByStateOrIdOrCustomer(String filter) {
+    public List<Claim> findClaimsByStateOrIdOrCustomer(final String filter) {
         try {
-            QClaim claim = QClaim.claim;
+            final QClaim claim = QClaim.claim;
 
-            List<Customer> customerFound = customerRepository.findByIdentificationNumberLikeOrderByIdAsc(filter);
+            final List<Customer> customerFound = customerRepository.findByIdentificationNumberLikeOrderByIdAsc(filter);
 
-            Iterable<Claim> claimsIterable = claimRepository
+            final Iterable<Claim> claimsIterable = claimRepository
                     .findAll(claim.id.contains(filter).or(claim.state.contains(filter)).or(claim.customer.in(customerFound)));
 
-            List<Claim> claims = StreamSupport
+            final List<Claim> claims = StreamSupport
                     .stream(claimsIterable.spliterator(), false)
                     .collect(Collectors.toList());
 
@@ -117,7 +117,7 @@ public class ClaimDomain implements IClaimDomain {
      */
     public Claim findOne(final String id) {
         try {
-            Optional<Claim> request = claimRepository.findById(id);
+            final Optional<Claim> request = claimRepository.findById(id);
             if (request.isPresent()) {
                 return request.get();
             } else {

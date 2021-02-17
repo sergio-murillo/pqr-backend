@@ -44,10 +44,10 @@ public class RequestDomain implements IRequestDomain {
      */
     public Request createRequest(final CreateRequestDto dto) {
         try {
-            Optional<Customer> customerFound = Optional.of(customerRepository.findByIdentificationNumber(dto.getClientId()));
+            final Optional<Customer> customerFound = Optional.of(customerRepository.findByIdentificationNumber(dto.getClientId()));
             if (customerFound.isPresent()) {
-                Customer customer = customerFound.get();
-                Request request = modelMapper.map(dto, Request.class);
+                final Customer customer = customerFound.get();
+                final Request request = modelMapper.map(dto, Request.class);
                 request.setId(UUID.randomUUID().toString());
                 request.setCustomer(customer);
                 request.setCreationDate(LocalDateTime.now());
@@ -78,16 +78,16 @@ public class RequestDomain implements IRequestDomain {
     /**
      * Metodo encargado de filtrar por estado o ID todas las peticiones/quejas
      */
-    public List<Request> findRequestsByStateOrIdOrCustomer(String filter) {
+    public List<Request> findRequestsByStateOrIdOrCustomer(final String filter) {
         try {
-            QRequest request = new QRequest("request");
+            final QRequest request = new QRequest("request");
 
-            List<Customer> customerFound = customerRepository.findByIdentificationNumberLikeOrderByIdAsc(filter);
+            final List<Customer> customerFound = customerRepository.findByIdentificationNumberLikeOrderByIdAsc(filter);
 
-            Iterable<Request> requestsIterable = requestRepository
+            final Iterable<Request> requestsIterable = requestRepository
                     .findAll(request.id.contains(filter).or(request.state.contains(filter).or(request.customer.in(customerFound))));
 
-            List<Request> requests = StreamSupport
+            final List<Request> requests = StreamSupport
                     .stream(requestsIterable.spliterator(), false)
                     .collect(Collectors.toList());
 
@@ -104,7 +104,7 @@ public class RequestDomain implements IRequestDomain {
      */
     public Request findOne(final String id) {
         try {
-            Optional<Request> request = requestRepository.findById(id);
+            final Optional<Request> request = requestRepository.findById(id);
             if (request.isPresent()) {
                 return request.get();
             } else {
