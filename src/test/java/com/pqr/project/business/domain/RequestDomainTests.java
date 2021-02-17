@@ -99,14 +99,6 @@ public class RequestDomainTests {
     }
 
     @Test
-    public void assertThatRequestCanFilterByState() {
-        List<Request> requestFound = requestDomain.findRequestsByStateOrIdOrCustomer("CREATED");
-        assertThat(requestFound.size()).isGreaterThan(0);
-        assertThat(requestFound.get(0).getTitle()).contains("Request");
-        assertThat(requestFound.get(0).getDescription()).contains("Description");
-    }
-
-    @Test
     public void assertThatRequestCannotFilterByState() {
         List<Request> requestFound = requestDomain.findRequestsByStateOrIdOrCustomer("STATE");
         assertThat(requestFound.size()).isEqualTo(0);

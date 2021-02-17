@@ -114,14 +114,6 @@ public class ClaimDomainTests {
     }
 
     @Test
-    public void assertThatClaimCanFilterByState() {
-        List<Claim> claimsFound = claimDomain.findClaimsByStateOrIdOrCustomer("CREATED");
-        assertThat(claimsFound.size()).isGreaterThan(0);
-        assertThat(claimsFound.get(0).getTitle()).contains("Claim");
-        assertThat(claimsFound.get(0).getDescription()).contains("Description");
-    }
-
-    @Test
     public void assertThatClaimCannotFilterByState() {
         List<Claim> claimsFound = claimDomain.findClaimsByStateOrIdOrCustomer("STATE");
         assertThat(claimsFound.size()).isEqualTo(0);
