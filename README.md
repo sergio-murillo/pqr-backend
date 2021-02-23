@@ -21,3 +21,9 @@ $ mvn package
 ```
 mvn spring-boot:run
 ```
+
+3. Create Collections and save customer test
+```
+En la carpeta raiz se encuentra un archivo llamado collections.text
+el cual crea las colecciones necesarias y el user de prueba
+```
