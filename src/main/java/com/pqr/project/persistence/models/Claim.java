@@ -42,6 +42,6 @@ public class Claim {
 
   private String answer;
 
-  @Indexed(name = "state_index", unique=true)
+  @Indexed(name = "state_index")
   private String state;
 }
