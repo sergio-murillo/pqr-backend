@@ -23,16 +23,6 @@ public class PqrConstants {
     public static final String NOT_EMPTY_ERROR = "El campo no puede estar vacio";
     public static final String VALUES_ERROR = "El campo no está incluido dentro de los posibles valores";
 
-    public static final String[] SWAGGER_URLS = {
-            "/swagger-resources/**",
-            "/swagger-ui.html",
-            "/v2/api-docs",
-            "/webjars/**"
-    };
+    public static final Integer MAX_DAYS = 5;
 
-    public static final String CREATED = "CREATED";
-
-    public static final String UPDATED = "UPDATED";
-
-    public static final String DELETED = "DELETED";
 }

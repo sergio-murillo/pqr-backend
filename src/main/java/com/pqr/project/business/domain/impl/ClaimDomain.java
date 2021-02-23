@@ -54,7 +54,7 @@ public class ClaimDomain implements IClaimDomain {
             if (requestFound.isPresent()) {
                 final Request request = requestFound.get();
                 final Long daysDifference = Duration.between(request.getCreationDate(), LocalDateTime.now()).toDays();
-                if (daysDifference > 5 || !request.getAnswer().isEmpty()) {
+                if (daysDifference > PqrConstants.MAX_DAYS || !request.getAnswer().isEmpty()) {
                     final Claim claim = modelMapper.map(dto, Claim.class);
                     claim.setCustomer(request.getCustomer());
                     claim.setCreationDate(LocalDateTime.now());
