@@ -1,3 +1,5 @@
 db.createCollection("claims", { capped : true, size : 5242880, max : 5000 } )
 db.createCollection("customers", { capped : true, size : 5242880, max : 5000 } )
 db.createCollection("requests", { capped : true, size : 5242880, max : 5000 } )
+<!-- Se debe agregar por lo menos un cliente a la DB
+db.customers.insert( { identification_number: "1121927868", first_name: "Pepito", last_name: "Perez", cellphone_number: "666666", age: 25 } )
